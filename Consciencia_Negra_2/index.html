@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<!--
+  SITE: Mark Dean - o homem por trás do computador pessoal
+  Tudo está neste único arquivo (HTML + CSS) para ficar fácil de subir no GitHub.
+
+  COMO LER ESTE ARQUIVO:
+  1) <style>  ... </style>  -> o CSS: cores, fontes e layout
+  2) <body>   ... </body>   -> o conteúdo que aparece na página
+  Procure os comentários "EDITE AQUI" para trocar nomes, textos e fotos.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- Faz o site se ajustar bem no celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mark Dean | História, invenções e curiosidades</title>
+  <meta name="description" content="Conheça a trajetória de Mark Dean, engenheiro que ajudou a desenvolver o computador pessoal da IBM e liderou a criação do primeiro processador de 1 GHz.">
+
+  <style>
+    /* ===== CORES E FONTES (variáveis: mude aqui e muda no site todo) ===== */
+    :root {
+      --azul-escuro: #0f1b33;
+      --azul: #1d3a6e;
+      --dourado: #f2b134;
+      --fundo: #f6f7fb;
+      --branco: #ffffff;
+      --texto: #1f2937;
+      --texto-suave: #5b6475;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--fundo);
+      color: var(--texto);
+      line-height: 1.7;
+    }
+
+    /* ===== MENU DO TOPO ===== */
+    header {
+      background: var(--azul-escuro);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 22px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo { color: var(--dourado); font-weight: 700; letter-spacing: 1px; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    nav a { color: #dbe3f5; text-decoration: none; font-size: 0.95rem; }
+    nav a:hover { color: var(--dourado); }
+
+    /* ===== TOPO DA PÁGINA (hero) ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--azul-escuro), var(--azul));
+      color: var(--branco);
+      padding: 70px 20px 80px;
+    }
+    .hero-conteudo {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+    .hero-texto { flex: 1 1 340px; }
+    .hero .etiqueta {
+      display: inline-block;
+      background: var(--dourado);
+      color: var(--azul-escuro);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.1; margin-bottom: 14px; }
+    .hero p { color: #cfd9f0; font-size: 1.1rem; max-width: 520px; }
+
+    /* Espaço da foto */
+    .foto {
+      flex: 0 1 280px;
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
+      border: 3px dashed var(--dourado);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: #cfd9f0;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+    .foto img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ===== SEÇÕES ===== */
+    main { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    section { padding: 50px 0 10px; }
+    h2 {
+      font-size: 1.9rem;
+      color: var(--azul-escuro);
+      margin-bottom: 8px;
+    }
+    h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--dourado);
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+    .intro { color: var(--texto-suave); margin: 14px 0 22px; }
+    section p { margin-bottom: 14px; }
+
+    /* ===== DADOS RÁPIDOS ===== */
+    .dados {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .dado {
+      background: var(--branco);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 2px 10px rgba(15, 27, 51, 0.07);
+      border-top: 4px solid var(--dourado);
+    }
+    .dado strong { display: block; font-size: 1.5rem; color: var(--azul); }
+    .dado span { color: var(--texto-suave); font-size: 0.9rem; }
+
+    /* ===== CARTÕES (feitos e curiosidades) ===== */
+    .cartoes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 18px;
+    }
+    .cartao {
+      background: var(--branco);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 2px 10px rgba(15, 27, 51, 0.07);
+    }
+    .cartao .icone { font-size: 1.8rem; margin-bottom: 6px; }
+    .cartao h3 { color: var(--azul); margin-bottom: 6px; font-size: 1.1rem; }
+    .cartao p { margin: 0; color: var(--texto-suave); font-size: 0.97rem; }
+
+    /* ===== LINHA DO TEMPO ===== */
+    .linha-tempo {
+      list-style: none;
+      border-left: 4px solid var(--azul);
+      margin-left: 8px;
+      padding-left: 24px;
+    }
+    .linha-tempo li { position: relative; margin-bottom: 22px; }
+    .linha-tempo li::before {
+      content: "";
+      position: absolute;
+      left: -35px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      background: var(--dourado);
+      border: 3px solid var(--azul);
+      border-radius: 50%;
+    }
+    .linha-tempo .ano { font-weight: 700; color: var(--azul); }
+
+    /* ===== CAIXA DE DESTAQUE ===== */
+    .destaque {
+      background: var(--azul-escuro);
+      color: var(--branco);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .destaque strong { color: var(--dourado); }
+
+    /* ===== FONTES E RODAPÉ ===== */
+    .fontes { padding-left: 20px; color: var(--texto-suave); }
+    .fontes a { color: var(--azul); }
+    .fontes li { margin-bottom: 6px; word-break: break-word; }
+
+    footer {
+      background: var(--azul-escuro);
+      color: #cfd9f0;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+      font-size: 0.95rem;
+    }
+    footer strong { color: var(--dourado); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== MENU ===== -->
+  <header>
+    <nav>
+      <span class="logo">MARK DEAN</span>
+      <ul>
+        <li><a href="#biografia">Biografia</a></li>
+        <li><a href="#feitos">Feitos</a></li>
+        <li><a href="#linha-do-tempo">Linha do tempo</a></li>
+        <li><a href="#curiosidades">Curiosidades</a></li>
+        <li><a href="#fontes">Fontes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== TOPO ===== -->
+  <div class="hero">
+    <div class="hero-conteudo">
+      <div class="hero-texto">
+        <span class="etiqueta">Negros na tecnologia</span>
+        <h1>Mark Dean</h1>
+        <p>Engenheiro elétrico responsável por tecnologias essenciais do primeiro computador pessoal da IBM e do chip pioneiro de 1 GHz.</p>
+      </div>
+
+      <!--
+        EDITE AQUI: para colocar uma foto, salve a imagem na mesma pasta do index.html
+        (por exemplo, com o nome mark-dean.jpg) e troque o texto do quadrado pontilhado por:
+        <img src="mark-dean.jpg" alt="Retrato de Mark Dean">
+        Use uma foto de uso livre e cite a fonte dela na seção Fontes.
+      -->
+      <div class="foto">
+        <img src="mark_dean.jpg" alt="Retrato de Mark Dean">
+      </div>
+    </div>
+  </div>
+  
+  <main>
+
+    <!-- ===== BIOGRAFIA ===== -->
+    <section id="biografia">
+      <h2>Biografia</h2>
+      <p class="intro">Como um garoto curioso do Tennessee ajudou a construir a base dos computadores atuais.</p>
+
+      <div class="dados">
+        <div class="dado"><strong>1957</strong><span>Nascimento em Jefferson City, Tennessee (EUA)</span></div>
+        <div class="dado"><strong>3 de 9</strong><span>patentes originais do PC da IBM têm o nome dele</span></div>
+        <div class="dado"><strong>20+</strong><span>patentes registradas ao longo da carreira</span></div>
+        <div class="dado"><strong>1º</strong><span>engenheiro negro nomeado IBM Fellow</span></div>
+      </div>
+
+      <p>
+        Mark Edward Dean nasceu em 2 de março de 1957, em Jefferson City, no estado do Tennessee (EUA).
+        Incentivado pelo pai, que trabalhava como engenheiro, cresceu desmontando e montando aparelhos e
+        logo mostrou facilidade para matemática e ciências.
+      </p>
+      <p>
+        Entrou na Universidade do Tennessee para estudar Engenharia Elétrica e se formou em 1979 entre os
+        melhores alunos da turma. No mesmo ano, foi contratado pela IBM, na unidade de Boca Raton, na Flórida.
+        Mesmo trabalhando em tempo integral, continuou estudando: concluiu o mestrado na Florida Atlantic
+        University em 1982 e o doutorado na Universidade de Stanford em 1992.
+      </p>
+      <p>
+        Foram mais de trinta anos dentro da IBM à frente de projetos que definiram como os computadores
+        pessoais funcionam até hoje. Em 2013, decidiu deixar a empresa e voltar para a Universidade do
+        Tennessee para dar aulas e orientar novos estudantes, onde hoje atua como professor emérito.
+      </p>
+    </section>
+
+    <!-- ===== FEITOS ===== -->
+    <section id="feitos">
+      <h2>Principais feitos</h2>
+      <p class="intro">Invenções, avanços técnicos e reconhecimentos que marcaram sua trajetória.</p>
+
+      <div class="cartoes">
+        <div class="cartao">
+          <div class="icone">💻</div>
+          <h3>O PC original da IBM</h3>
+          <p>Fez parte da equipe que criou o computador pessoal da IBM, lançado em 1981. Das nove patentes iniciais dessa máquina, três são dele.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">🔌</div>
+          <h3>Barramento ISA</h3>
+          <p>Junto com Dennis Moeller, desenvolveu o sistema ISA, que permitiu conectar teclado, impressora, monitor e unidades de disco ao computador de forma padronizada.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">🎨</div>
+          <h3>Gráficos coloridos</h3>
+          <p>Participou diretamente da criação do adaptador gráfico colorido (CGA), ajudando a levar cores aos monitores dos primeiros computadores pessoais.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">⚡</div>
+          <h3>O primeiro chip de 1 GHz</h3>
+          <p>Em 1999, chefiou a equipe que construiu o primeiro processador capaz de operar a 1 gigahertz — cerca de 1 bilhão de cálculos por segundo.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">🏅</div>
+          <h3>Primeiro IBM Fellow negro</h3>
+          <p>Em 1995, tornou-se o primeiro afro-americano a receber o título de IBM Fellow, o reconhecimento técnico mais alto dentro da empresa.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">🏛️</div>
+          <h3>Hall da Fama dos Inventores</h3>
+          <p>Em 1997, teve seu nome incluído no National Inventors Hall of Fame, nos EUA, ao lado de Dennis Moeller, pela criação do barramento ISA.</p>
+        </div>
+      </div>
+
+      <div class="destaque">
+        <p>
+          <strong>Outros prêmios e títulos:</strong> foi eleito para a Academia Nacional de Engenharia dos EUA (2001)
+          e recebeu homenagens como o Black Engineer of the Year (1997), o Ronald H. Brown American Innovators Award
+          e o Distinguished Engineer Award, da Sociedade Nacional de Engenheiros Negros (NSBE).
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== LINHA DO TEMPO ===== -->
+    <section id="linha-do-tempo">
+      <h2>Linha do tempo</h2>
+      <p class="intro">Principais datas da vida e da carreira de Mark Dean.</p>
+
+      <ul class="linha-tempo">
+        <li><span class="ano">1957</span><br>Nasce em Jefferson City, no Tennessee.</li>
+        <li><span class="ano">1979</span><br>Termina a graduação em Engenharia Elétrica na Universidade do Tennessee e entra para a IBM.</li>
+        <li><span class="ano">1981</span><br>A IBM lança seu primeiro computador pessoal (IBM PC), com tecnologias patenteadas por Dean.</li>
+        <li><span class="ano">1982</span><br>Conclui o mestrado e, aos 25 anos, assume como engenheiro-chefe da área de PCs da IBM.</li>
+        <li><span class="ano">1992</span><br>Conclui o doutorado em Engenharia Elétrica na Universidade de Stanford.</li>
+        <li><span class="ano">1995</span><br>Torna-se o primeiro engenheiro negro nomeado IBM Fellow.</li>
+        <li><span class="ano">1997</span><br>Entra para o National Inventors Hall of Fame e recebe o prêmio Black Engineer of the Year.</li>
+        <li><span class="ano">1999</span><br>Lidera o desenvolvimento do primeiro processador de 1 GHz do mundo.</li>
+        <li><span class="ano">2001</span><br>Passa a integrar a Academia Nacional de Engenharia dos Estados Unidos.</li>
+        <li><span class="ano">2013</span><br>Deixa a IBM após 34 anos e começa a lecionar na Universidade do Tennessee.</li>
+        <li><span class="ano">2018</span><br>Assume interinamente o cargo de reitor da Faculdade de Engenharia da universidade.</li>
+      </ul>
+    </section>
+
+    <!-- ===== CURIOSIDADES ===== -->
+    <section id="curiosidades">
+      <h2>Curiosidades</h2>
+      <p class="intro">Alguns detalhes menos conhecidos sobre a vida e a rotina do inventor.</p>
+
+      <div class="cartoes">
+        <div class="cartao">
+          <div class="icone">📅</div>
+          <h3>Um dia no calendário</h3>
+          <p>Em 2019, o condado de Knox, no Tennessee, oficializou o dia 25 de abril como o "Dia do Dr. Mark Dean" em homenagem à sua carreira.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">📱</div>
+          <h3>Trocou o PC pelo tablet</h3>
+          <p>Em 2011, durante uma entrevista, Dean contou que já não usava computador de mesa no dia a dia — preferia fazer quase tudo pelo tablet.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">🎂</div>
+          <h3>Chefia aos 25 anos</h3>
+          <p>Com apenas 25 anos, em 1982, ele já ocupava o posto de engenheiro-chefe responsável pelo desenvolvimento dos PCs da IBM.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">🌍</div>
+          <h3>Carreira internacional</h3>
+          <p>Antes de se aposentar da IBM, atuou como diretor de tecnologia (CTO) da empresa para toda a região do Oriente Médio e da África.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">🚀</div>
+          <h3>Incentivo aos estudantes</h3>
+          <p>Em conversas com jovens, costuma reforçar que obstáculos sempre vão aparecer, mas não devem definir até onde alguém pode chegar.</p>
+        </div>
+        <div class="cartao">
+          <div class="icone">📈</div>
+          <h3>Um salto de velocidade</h3>
+          <p>Antes do chip criado por sua equipe em 1999, os processadores rodavam na casa dos megahertz (milhões de ciclos por segundo). Ele ajudou a romper a barreira do bilhão.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FONTES ===== -->
+    <section id="fontes">
+      <h2>Fontes</h2>
+      <p class="intro">Sites consultados para a pesquisa (acesso em outubro de 2026).</p>
+      <ol class="fontes">
+        <li><a href="https://www.ibm.com/history/mark-dean" target="_blank" rel="noopener">IBM - Mark Dean (história da IBM)</a></li>
+        <li><a href="https://eecs.utk.edu/people/mark-dean/" target="_blank" rel="noopener">Universidade do Tennessee - Perfil de Mark Dean</a></li>
+        <li><a href="https://www.biography.com/inventors/mark-dean" target="_blank" rel="noopener">Biography.com - Mark Dean</a></li>
+        <li><a href="https://www.blackpast.org/african-american-history/dean-mark-1957/" target="_blank" rel="noopener">BlackPast - Mark Dean</a></li>
+        <li><a href="https://ethw.org/Mark_E._Dean" target="_blank" rel="noopener">ETHW - Mark E. Dean</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Mark_Dean_(computer_scientist)" target="_blank" rel="noopener">Wikipedia - Mark Dean (computer scientist)</a></li>
+        <!-- EDITE AQUI: se usar uma foto, coloque o link de onde ela veio -->
+      </ol>
+    </section>
+
+  </main>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer>
+    <p><strong>Trabalho escolar</strong> sobre pessoas negras importantes para a tecnologia e a informação.</p>
+    <!-- EDITE AQUI: nomes do grupo, curso, turma e nome do professor -->
+    <p>Grupo: Victor Lopes Pinheiro, Pedro Matos Silveira, Eduardo de Jesus Siqueira e Marlon Ionas Santiago | Curso: Inteligência Artificial, Turma: 1ºL | Professor: Gustavo Pesco</p>
+  </footer>
+
+</body>
+</html>
